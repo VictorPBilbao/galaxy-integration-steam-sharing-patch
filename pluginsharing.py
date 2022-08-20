@@ -44,8 +44,10 @@ class SteamSharingPlugin(SteamPlugin):
 
             try:
                 for game in othergames:
-                    hasit = any(f == str(game["appid"]) for f in owngames) or any(
-                        f.game_id == str(game["appid"]) for f in newgames)
+                    hasit = str(game["appid"]) in owngames or any(
+                        f.game_id == str(game["appid"]) for f in newgames
+                    )
+
                     if not hasit:
                         self._family_sharing_games.append(str(game["appid"]))
                         newgame = Game(
